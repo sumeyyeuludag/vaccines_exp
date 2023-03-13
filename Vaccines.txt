@@ -1,0 +1,8 @@
+vaccination_number = int(input("Enter vaccination number: "))
+vaccination_date = input("Enter vaccination date (YYYY-MM-DD): ")
+vaccine_type = input("Enter vaccine type: ")
+country = input("Enter country: ")
+
+min_daily_vaccinations = df.groupby("country")["daily_vaccinations"].min()
+df["daily_vaccinations"] = df.groupby("country")["daily_vaccinations"].apply(lambda x: x.fillna(min_daily_vaccinations[x.name]))
+df["daily_vaccinations"] = df.groupby("country")["daily_vaccinations"].apply(lambda x: x.fillna(0))
